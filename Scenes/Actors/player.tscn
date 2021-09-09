@@ -1,10 +1,33 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Sprites/Sonic/0.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/Sonic/8.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Sonic/3.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Sonic/2.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Sonic/5.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Sonic/6.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Sonic/4.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Sonic/7.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Sonic/1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Sonic/14.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Sonic/15.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Sonic/13.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Sonic/17.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Sonic/16.png" type="Texture" id=15]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Spin",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "Idle",
@@ -14,6 +37,9 @@ animations = [ {
 [sub_resource type="CapsuleShape2D" id=2]
 height = 14.8962
 
+[sub_resource type="CircleShape2D" id=3]
+radius = 15.6028
+
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
@@ -21,10 +47,18 @@ script = ExtResource( 2 )
 frames = SubResource( 1 )
 animation = "Idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="StandingShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.471947, 1.88774 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.45, 0.45 )
+
+[node name="SpinShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 3 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, 20 )
