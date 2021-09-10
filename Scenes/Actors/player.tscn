@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Sprites/Sonic/0.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/player.gd" type="Script" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://Sprites/Sonic/9.png" type="Texture" id=18]
 [ext_resource path="res://Sprites/Sonic/10.png" type="Texture" id=19]
 [ext_resource path="res://Sprites/Sonic/11.png" type="Texture" id=20]
+[ext_resource path="res://Scenes/HUDs/hud.tscn" type="PackedScene" id=21]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -66,6 +67,12 @@ current = true
 zoom = Vector2( 0.5, 0.5 )
 drag_margin_left = 0.12
 drag_margin_right = 0.12
+
+[node name="HUD" parent="Camera2D" instance=ExtResource( 21 )]
+margin_left = 0.225128
+margin_top = -0.624649
+margin_right = 0.225128
+margin_bottom = -0.624649
 
 [node name="SpinShape2D" type="CollisionShape2D" parent="."]
 visible = false
