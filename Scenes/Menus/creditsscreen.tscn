@@ -57,4 +57,7 @@ margin_right = 551.881
 margin_bottom = 453.153
 custom_fonts/font = SubResource( 1 )
 text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

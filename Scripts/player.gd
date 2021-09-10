@@ -11,6 +11,7 @@ var grv = 100
 var jump_force = 1500
 var acc = 50
 var max_speed = 1000
+var run_threshold = 950
 
 var state = IN_AIR
 
@@ -45,9 +46,12 @@ func _physics_process(delta):
 			if input_vector.x != 0:
 				move_speed += acc
 				velocity.x = input_vector.x * move_speed
+				if move_speed >= run_threshold:
+					$AnimatedSprite.play("Run")
+				else:
+					$AnimatedSprite.play("Walk")
 				if move_speed >= max_speed:
 					move_speed = max_speed
-				$AnimatedSprite.play("Walk")
 				if input_vector.x < 0:
 					$AnimatedSprite.flip_h = true
 				else:
