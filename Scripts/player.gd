@@ -6,10 +6,10 @@ enum {
 	ROLLING
 }
 
-var move_speed = 30
+var move_speed = 40
 var grv = 100
 var jump_force = 1500
-var acc = 50
+var acc = 10
 var max_speed = 1000
 var run_threshold = 950
 
@@ -74,6 +74,4 @@ func _physics_process(delta):
 			
 			if $RayCast2D.is_colliding() == false:
 				state = IN_AIR
-	
-	print(move_speed)
 	move_and_slide(velocity)
