@@ -64,11 +64,8 @@ shape = SubResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
-drag_margin_h_enabled = true
-offset_v = -0.67
 drag_margin_left = 0.12
 drag_margin_right = 0.12
-editor_draw_drag_margin = true
 
 [node name="SpinShape2D" type="CollisionShape2D" parent="."]
 visible = false
