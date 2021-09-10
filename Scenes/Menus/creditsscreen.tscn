@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/creditsscreen.gd" type="Script" id=1]
+[ext_resource path="res://fonts/NiseSegaSonic.TTF" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 2 )
+
+[node name="CreditsScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1175.0
+margin_bottom = 703.0
+color = Color( 0.0196078, 0.0196078, 0.0901961, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -104.901
+margin_top = 249.615
+margin_right = 281.099
+margin_bottom = 263.615
+text = "Concept, Sprites, Sounds by Sega                                            "
+
+[node name="Label3" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -52.0
+margin_top = -7.0
+margin_right = 52.0
+margin_bottom = 7.0
+text = "Engine by Godot"
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -77.3348
+margin_top = -268.954
+margin_right = 74.6652
+margin_bottom = -254.954
+text = "Code by Grudgemonkey"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 485.881
+margin_top = 431.153
+margin_right = 551.881
+margin_bottom = 453.153
+custom_fonts/font = SubResource( 1 )
+text = "Back"
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

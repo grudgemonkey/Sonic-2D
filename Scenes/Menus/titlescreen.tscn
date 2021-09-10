@@ -1,0 +1,88 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://fonts/NiseSegaSonic.TTF" type="DynamicFontData" id=1]
+[ext_resource path="res://Scripts/titlescreen.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 100
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 15
+font_data = ExtResource( 1 )
+
+[node name="TitleScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1176.0
+margin_bottom = 656.0
+color = Color( 0.0196078, 0.0196078, 0.0901961, 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -294.045
+margin_top = -190.089
+margin_right = 283.955
+margin_bottom = -89.0888
+custom_fonts/font = SubResource( 1 )
+text = "Sonic 2D"
+uppercase = true
+
+[node name="PlayButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.5
+margin_top = -31.0
+margin_right = 88.5
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 2 )
+text = "Play"
+
+[node name="Credits" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -88.5
+margin_top = 82.8713
+margin_right = 88.5
+margin_bottom = 144.871
+custom_fonts/font = SubResource( 2 )
+text = "Credits"
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -170.0
+margin_top = -48.9628
+margin_right = 170.0
+margin_bottom = -32.9628
+custom_fonts/font = SubResource( 3 )
+text = "a fan game by Grudgemonkey"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="versionlabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "pre-alpha ver. 1"
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="Credits" to="." method="_on_Credits_pressed"]
