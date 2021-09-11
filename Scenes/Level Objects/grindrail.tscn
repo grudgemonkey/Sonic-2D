@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/kenney_prototype_textures/orange/texture_03.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/grindrail.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 123.89, 1.79057 )
+
+[node name="GrindRail" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 108, 42, 248, 3 )
+
+[node name="StraightShape" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )

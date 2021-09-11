@@ -1,9 +1,12 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/kenney_prototype_textures/green/texture_03.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Actors/player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/kenney_prototype_textures/dark/texture_08.png" type="Texture" id=3]
 [ext_resource path="res://Scenes/Items/ring.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Level Objects/grindrail.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Sounds/Game Land 1 - Sonic Colors [OST].ogg" type="AudioStream" id=6]
+[ext_resource path="res://Scripts/testzone.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 126.096, 552.716 )
@@ -37,13 +40,8 @@ points = PoolVector2Array( 0, 0, 145, 0, 145, 139, 0, 139 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 55.6428, 10 )
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 108.538, 10 )
-
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 444.513, 92.1529 )
-
 [node name="TestZone" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="Wall" type="StaticBody2D" parent="."]
 position = Vector2( -115.817, -393.777 )
@@ -61,14 +59,18 @@ shape = SubResource( 1 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource( 3 )
+collision_layer = 4
+collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0 )
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 402.169, -23.3267 )
 
 [node name="Platform" type="StaticBody2D" parent="."]
 position = Vector2( 234.595, -118.981 )
+collision_layer = 4
+collision_mask = 0
 __meta__ = {
 "_edit_group_": true
 }
@@ -81,36 +83,6 @@ region_rect = Rect2( 97.5789, 47.5263, 110.526, 20 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
 shape = SubResource( 4 )
 
-[node name="Platform2" type="StaticBody2D" parent="."]
-position = Vector2( 1183.44, 11.3367 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Platform2"]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 405.065, 60.6643, 218.408, 19.3853 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
-shape = SubResource( 5 )
-
-[node name="thing" type="StaticBody2D" parent="."]
-position = Vector2( 1650.64, 19.0704 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="thing"]
-position = Vector2( 295.07, 76.465 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 45.0167, 43.3812, 896.089, 190.906 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="thing"]
-position = Vector2( 296.33, 74.0825 )
-shape = SubResource( 6 )
-
 [node name="Rings" type="Node2D" parent="."]
 
 [node name="Ring" parent="Rings" instance=ExtResource( 4 )]
@@ -118,3 +90,18 @@ position = Vector2( 467, -15 )
 
 [node name="Ring2" parent="Rings" instance=ExtResource( 4 )]
 position = Vector2( 493, -15 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -5.049
+
+[node name="Rails" type="Node2D" parent="."]
+position = Vector2( 2094.3, -137.817 )
+
+[node name="GrindRail" parent="Rails" instance=ExtResource( 5 )]
+position = Vector2( -290.874, 138.569 )
+
+[node name="GrindRail2" parent="Rails" instance=ExtResource( 5 )]
+position = Vector2( -43.2324, 138.624 )
+[connection signal="body_entered" from="Rails/GrindRail" to="Player" method="_on_GrindRail_body_entered"]
+[connection signal="body_entered" from="Rails/GrindRail2" to="Player" method="_on_GrindRail_body_entered"]

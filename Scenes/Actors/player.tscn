@@ -24,9 +24,9 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ) ],
 "loop": true,
-"name": "Spin",
+"name": "Run",
 "speed": 15.0
 }, {
 "frames": [ ExtResource( 1 ) ],
@@ -39,9 +39,9 @@ animations = [ {
 "name": "Walk",
 "speed": 15.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 17 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ],
 "loop": true,
-"name": "Run",
+"name": "Spin",
 "speed": 15.0
 } ]
 
@@ -52,6 +52,7 @@ height = 14.8962
 radius = 15.6028
 
 [node name="Player" type="KinematicBody2D"]
+collision_mask = 14
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -69,6 +70,7 @@ drag_margin_left = 0.12
 drag_margin_right = 0.12
 
 [node name="HUD" parent="Camera2D" instance=ExtResource( 21 )]
+visible = false
 margin_left = 0.225128
 margin_top = -0.624649
 margin_right = 0.225128
@@ -81,6 +83,7 @@ shape = SubResource( 3 )
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 20 )
+collision_mask = 4
 
 [node name="JumpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 16 )

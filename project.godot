@@ -42,6 +42,13 @@ down={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="Items"
+2d_physics/layer_3="ground"
+2d_physics/layer_4="rails"
+
 [rendering]
 
 environment/default_environment="res://default_env.tres"
