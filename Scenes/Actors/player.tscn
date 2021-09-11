@@ -29,6 +29,11 @@ animations = [ {
 "name": "Run",
 "speed": 15.0
 }, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": true,
+"name": "Spin",
+"speed": 15.0
+}, {
 "frames": [ ExtResource( 1 ) ],
 "loop": true,
 "name": "Idle",
@@ -37,11 +42,6 @@ animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "Walk",
-"speed": 15.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 14 ), ExtResource( 15 ) ],
-"loop": true,
-"name": "Spin",
 "speed": 15.0
 } ]
 
@@ -64,10 +64,14 @@ position = Vector2( 0.471947, 1.88774 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 0, -10 )
 current = true
 zoom = Vector2( 0.5, 0.5 )
+limit_left = 0
+limit_bottom = 200
 drag_margin_left = 0.12
 drag_margin_right = 0.12
+editor_draw_limits = true
 
 [node name="HUD" parent="Camera2D" instance=ExtResource( 21 )]
 visible = false
@@ -79,6 +83,7 @@ margin_bottom = -0.624649
 [node name="SpinShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource( 3 )
+disabled = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true

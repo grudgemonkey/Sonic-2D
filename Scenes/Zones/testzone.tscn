@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/kenney_prototype_textures/green/texture_03.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Actors/player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 126.096, 552.716 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 55.6428, 10 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 145, 0, 145, 139, 0, 139 )
@@ -37,51 +40,14 @@ points = PoolVector2Array( 0, 0, 145, 0, 145, 139, 0, 139 )
 } ]
 0/z_index = 0
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 55.6428, 10 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 414.945, 88.1213 )
 
 [node name="TestZone" type="Node2D"]
 script = ExtResource( 7 )
 
-[node name="Wall" type="StaticBody2D" parent="."]
-position = Vector2( -115.817, -393.777 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Wall"]
-texture = ExtResource( 3 )
-region_enabled = true
-region_rect = Rect2( 272.468, 22.044, 259.643, 1086.5 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
-shape = SubResource( 1 )
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 3 )
-collision_layer = 4
-collision_mask = 0
-format = 1
-tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0 )
-
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 402.169, -23.3267 )
-
-[node name="Platform" type="StaticBody2D" parent="."]
-position = Vector2( 234.595, -118.981 )
-collision_layer = 4
-collision_mask = 0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="Platform"]
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 97.5789, 47.5263, 110.526, 20 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
-shape = SubResource( 4 )
 
 [node name="Rings" type="Node2D" parent="."]
 
@@ -95,13 +61,65 @@ position = Vector2( 493, -15 )
 stream = ExtResource( 6 )
 volume_db = -5.049
 
-[node name="Rails" type="Node2D" parent="."]
+[node name="Level" type="Node2D" parent="."]
+
+[node name="Wall" type="StaticBody2D" parent="Level"]
+position = Vector2( -115.817, -393.777 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Level/Wall"]
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 272.468, 22.044, 259.643, 1086.5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Wall"]
+shape = SubResource( 1 )
+
+[node name="Platform" type="StaticBody2D" parent="Level"]
+position = Vector2( 234.595, -118.981 )
+collision_layer = 4
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Level/Platform"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 97.5789, 47.5263, 110.526, 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Platform"]
+shape = SubResource( 4 )
+
+[node name="TileMap" type="TileMap" parent="Level"]
+tile_set = SubResource( 3 )
+collision_layer = 4
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 5, 0, 0, 6, 0, 0, 7, 0, 0, 8, 0, 0, 9, 0, 0, 10, 0, 0, 11, 0, 0, 12, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 17, 0, 0, 18, 0, 0, 19, 0, 0, 20, 0, 0, 21, 0, 0, 22, 0, 0, 23, 0, 0, 24, 0, 0 )
+
+[node name="Rails" type="Node2D" parent="Level"]
 position = Vector2( 2094.3, -137.817 )
 
-[node name="GrindRail" parent="Rails" instance=ExtResource( 5 )]
+[node name="GrindRail" parent="Level/Rails" instance=ExtResource( 5 )]
 position = Vector2( -290.874, 138.569 )
 
-[node name="GrindRail2" parent="Rails" instance=ExtResource( 5 )]
+[node name="GrindRail2" parent="Level/Rails" instance=ExtResource( 5 )]
 position = Vector2( -43.2324, 138.624 )
-[connection signal="body_entered" from="Rails/GrindRail" to="Player" method="_on_GrindRail_body_entered"]
-[connection signal="body_entered" from="Rails/GrindRail2" to="Player" method="_on_GrindRail_body_entered"]
+
+[node name="Ground" type="StaticBody2D" parent="Level"]
+position = Vector2( 2590.7, 87.1866 )
+collision_layer = 4
+collision_mask = 0
+
+[node name="Sprite" type="Sprite" parent="Level/Ground"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 153.759, 210.638, 832.783, 175.692 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/Ground"]
+shape = SubResource( 5 )
+[connection signal="body_entered" from="Level/Rails/GrindRail" to="Player" method="_on_GrindRail_body_entered"]
+[connection signal="body_entered" from="Level/Rails/GrindRail2" to="Player" method="_on_GrindRail_body_entered"]

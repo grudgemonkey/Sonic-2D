@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://addons/kenney_prototype_textures/green/texture_08.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/testzone2.gd" type="Script" id=2]
+[ext_resource path="res://Sounds/Game Land 1 - Sonic Colors [OST].ogg" type="AudioStream" id=3]
+[ext_resource path="res://Scenes/Actors/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Items/ring.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 507.663, 123.568 )
+
+[node name="TestZone2" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2( 480.337, 127.405 )
+collision_layer = 4
+collision_mask = 0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Ground"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 1020.6, 254.535 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Player" parent="." instance=ExtResource( 4 )]
+position = Vector2( 106.267, -57.0547 )
+
+[node name="rings" type="Node2D" parent="."]
+
+[node name="Ring" parent="rings" instance=ExtResource( 5 )]
+position = Vector2( 220, -84 )
+
+[node name="Ring2" parent="rings" instance=ExtResource( 5 )]
+position = Vector2( 268.695, -84.3746 )
+
+[node name="Ring3" parent="rings" instance=ExtResource( 5 )]
+position = Vector2( 245.097, -84.3746 )

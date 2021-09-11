@@ -44,8 +44,14 @@ func _physics_process(delta):
 		ROLLING:
 			$AnimatedSprite.play("Spin")
 			move_speed -= frc
-			if move_speed == 0:
-				state = ON_GROUND
+#			if move_speed <= 0:
+#				move_speed = 0
+#				if move_speed == 0:
+#					state = ON_GROUND
+			if Input.is_action_just_pressed("jump"):
+				velocity.y = -jump_force
+				$JumpSound.play()
+				state = JUMPING
 			if $RayCast2D.is_colliding() == false:
 				state = IN_AIR
 		ON_GROUND:
@@ -55,6 +61,10 @@ func _physics_process(delta):
 					$AnimatedSprite.flip_h = true
 				else:
 					$AnimatedSprite.flip_h = false
+				
+				if Input.is_action_just_pressed("down"):
+					state = ROLLING
+				
 				move_speed += acc
 				velocity.x = input_vector.x * move_speed
 			else:
@@ -64,14 +74,16 @@ func _physics_process(delta):
 			
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = -jump_force
+				$JumpSound.play()
 				state = JUMPING
+			
+			if Input.is_action_pressed("down"):
+				pass
 			
 			if $RayCast2D.is_colliding() == false:
 				state = IN_AIR
-			
-			if Input.is_action_just_pressed("down"):
-				state = ROLLING
 	
+	print(move_speed)
 	move_and_slide(velocity)
 
 
