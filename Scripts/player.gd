@@ -15,7 +15,7 @@ var acc = 10
 var max_speed = 1000
 var min_speed = 40
 var run_threshold = 950
-var frc = -300
+var frc = 20
 
 var rings : int = 0
 var points : int = 0
@@ -25,11 +25,14 @@ var state = IN_AIR
 var velocity : Vector2
 var input_vector : Vector2
 
+var direction : int = 1
+
 func _ready():
 	pass #$AnimatedSprite.speed_scale = 0.5
 
 func _process(delta):
 	$Camera2D/HUD.rings = rings
+	debug()
 
 func _physics_process(delta):
 	input_vector.x = Input.get_action_strength("right") - Input.get_action_strength("left")
@@ -40,6 +43,9 @@ func _physics_process(delta):
 		JUMPING:
 			$AnimatedSprite.play("Spin")
 			velocity.y += grv
+			velocity.x = input_vector.x * move_speed
+			if Input.is_action_just_pressed("jump"):
+				insta_shield()
 			if $RayCast2D.is_colliding():
 				state = ON_GROUND
 		GRINDING:
@@ -74,8 +80,10 @@ func _physics_process(delta):
 				$AnimatedSprite.play("Walk")
 				if input_vector.x < 0:
 					$AnimatedSprite.flip_h = true
+					direction = -1
 				else:
 					$AnimatedSprite.flip_h = false
+					direction = 1
 				
 				if Input.is_action_just_pressed("down"):
 					state = ROLLING
@@ -89,9 +97,10 @@ func _physics_process(delta):
 					$AnimatedSprite.play("Walk")
 			else:
 				$AnimatedSprite.play("Idle")
-				move_speed = 0
-				velocity.x = 0
-				#velocity.x -= frc
+#				move_speed = 0
+#				velocity.x = 0
+				move_speed -= min(abs(move_speed), frc) * sign(move_speed)
+				velocity.x = direction * move_speed
 			
 			if Input.is_action_just_pressed("jump"):
 				velocity.y = -jump_force
@@ -104,12 +113,20 @@ func _physics_process(delta):
 			if $RayCast2D.is_colliding() == false:
 				state = IN_AIR
 	
-	print(velocity.x)
+	print("vel:" + str(velocity.x))
+	print("gsp:" + str(move_speed))
 	move_and_slide(velocity)
+
+func insta_shield() -> void:
+	print("insta-shield")
 
 func stats() -> void:
 	pass
 
+func debug() -> void:
+	$Camera2D/HUD.move_speed = move_speed
+	$Camera2D/HUD.velocity = velocity.x
+	$Camera2D/HUD.direction = direction
 
 func _on_GrindRail_body_entered(body):
 	state = GRINDING
