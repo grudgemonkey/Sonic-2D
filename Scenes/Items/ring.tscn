@@ -29,4 +29,5 @@ frames = SubResource( 2 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -0.126
 [connection signal="body_entered" from="." to="." method="_on_Ring_body_entered"]
